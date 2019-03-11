@@ -36,9 +36,15 @@ class StoreContext {
         console.log('store-disposed-successfully');
     }
 }
+var __store = undefined;
 
-export function getStoreContext({ initialState = {}, states = [], effects = [] }) {
+export function setStoreContext({ initialState = {}, states = [], effects = [] }) {
     const ctx = new StoreContext(initialState, states);
     ctx.addEffects(...effects);
-    return ctx;
+    __store = ctx;
+}
+
+//export const Dagger = createContext();
+export function getStore() {
+    return __store;;
 }

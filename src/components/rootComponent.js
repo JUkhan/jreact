@@ -2,18 +2,16 @@ import { Component, h } from "../preact/preact";
 import { Counter } from "./counterComponent";
 import { AddTutorial } from "./addTutorialComponent";
 import { TutorialList } from "./tutotialListComponent";
+import { getStore } from '../store/storeContext';
 
 export class RootComponent extends Component {
     constructor() {
         super();
 
     }
-    componentWillMount() {
 
-        this.context.store = this.props.store;
-    }
     componentWillUnmount() {
-        this.context.store.dispose();
+        getStore().dispose();
     }
     render(props) {
         console.log('root-component');

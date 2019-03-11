@@ -1,12 +1,13 @@
 import { Component, h } from "../preact/preact";
 import { ADD_TUTORIAL } from "../states/actionTypes";
+import { getStore } from '../store/storeContext';
 
 export class AddTutorial extends Component {
     onSubmit = event => {
         event.preventDefault();
         const el = event.target.elements;
         const model = { name: el.name.value, url: el.url.value }
-        this.context.store.dispatch({ type: ADD_TUTORIAL, payload: model });
+        getStore().dispatch({ type: ADD_TUTORIAL, payload: model });
     }
     render() {
         console.log('add-tutorial-component')

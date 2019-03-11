@@ -1,5 +1,6 @@
 import { Component, h } from "../preact/preact";
 import { REMOVE_TUTORIAL } from "../states/actionTypes";
+import { getStore } from '../store/storeContext';
 
 export class TutorialList extends Component {
     constructor() {
@@ -8,7 +9,7 @@ export class TutorialList extends Component {
     }
     componentWillMount() {
 
-        this.subscription = this.context.store.select(state => state.tutorials)
+        this.subscription = getStore().select(state => state.tutorials)
             .subscribe(tutorials => this.setState({ tutorials }));
 
     }
@@ -16,11 +17,11 @@ export class TutorialList extends Component {
         this.subscription.unsubscribe();
     }
     onRemove(name) {
-        this.context.store.dispatch({ type: REMOVE_TUTORIAL, payload: name });
+        getStore().dispatch({ type: REMOVE_TUTORIAL, payload: name });
     }
     render({ }, { tutorials }) {
 
-        console.log('tutorial-list-component', this.state)
+        console.log('tutorial-list-component')
         return <div className="list-group">
             <a href="#" class="list-group-item list-group-item-action active">
                 Tutorials

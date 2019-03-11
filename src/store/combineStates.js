@@ -2,7 +2,7 @@ import { STATE_METADATA_KEY } from "./decorators/state";
 
 function updateState(state, action, instance) {
     const metaProp = instance[STATE_METADATA_KEY];
-    state = state || metaProp.initialState;
+    if (!state) { state = metaProp.initialState; }
     const actionProp = metaProp.actions[action.type];
     return actionProp ? instance[actionProp](state, action) : state;
 }

@@ -1,16 +1,19 @@
 import { Component, h } from "../preact/preact";
 import { INCREMENT, DECREMENT, ASYNC_INCREMENT } from "../states/actionTypes";
+import { getStore } from '../store/storeContext';
 
 export class Counter extends Component {
     constructor(props) {
         super(props)
         this.state = { count: 1 }
+        this.store = getStore();
+
     }
     com
     subscription;
     componentWillMount() {
 
-        this.subscription = this.context.store.select(state => state.count).subscribe(res => this.setState(res));
+        this.subscription = this.store.select(state => state.count).subscribe(res => this.setState(res));
         /*this.context.store.addEffect(action$ => action$.ofType(ASYNC_INCREMENT)
             .pipe(
                 //ofType(ASYNC_INCREMENT),
@@ -24,13 +27,13 @@ export class Counter extends Component {
     }
 
     increment = () => {
-        this.context.store.dispatch({ type: INCREMENT });
+        this.store.dispatch({ type: INCREMENT });
     }
     decrement = () => {
-        this.context.store.dispatch({ type: DECREMENT });
+        this.store.dispatch({ type: DECREMENT });
     }
     asyncIncrement = () => {
-        this.context.store.dispatch({ type: ASYNC_INCREMENT });
+        this.store.dispatch({ type: ASYNC_INCREMENT });
     }
     render(props, { count, msg }) {
         console.log('counter-component');
