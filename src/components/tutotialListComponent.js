@@ -1,23 +1,18 @@
 import { Component, h } from "../preact/preact";
 import { REMOVE_TUTORIAL } from "../states/actionTypes";
-import { getStore } from '../store/storeContext';
+import { Connect } from "../store/decorators/connect";
 
+@Connect({
+    tutorials: state => state.tutorials
+})
 export class TutorialList extends Component {
     constructor() {
         super()
         this.state = { tutorials: [] }
     }
-    componentWillMount() {
 
-        this.subscription = getStore().select(state => state.tutorials)
-            .subscribe(tutorials => this.setState({ tutorials }));
-
-    }
-    componentWillUnmount() {
-        this.subscription.unsubscribe();
-    }
     onRemove(name) {
-        getStore().dispatch({ type: REMOVE_TUTORIAL, payload: name });
+        this.store.dispatch({ type: REMOVE_TUTORIAL, payload: name });
     }
     render({ }, { tutorials }) {
 

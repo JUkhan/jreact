@@ -3,7 +3,7 @@ import { INCREMENT, DECREMENT, ASYNC_INCREMENT } from "./actionTypes";
 import { updateObject } from "../utli";
 
 @State({
-    name: 'count',
+    name: 'counter',
     initialState: { count: 10, msg: '' }
 })
 export class CounterSate {
