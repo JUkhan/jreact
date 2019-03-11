@@ -1,5 +1,5 @@
 import { State, Action } from "../store/decorators/state";
-import { INCREMENT, DECREMENT, ASYNC_INCREMENT } from "../actionTypes/actionTypes";
+import { INCREMENT, DECREMENT, ASYNC_INCREMENT } from "./actionTypes";
 import { updateObject } from "../utli";
 
 @State({

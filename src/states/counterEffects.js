@@ -1,5 +1,5 @@
 import { Effect } from "../store/decorators/effect";
-import { ASYNC_INCREMENT, INCREMENT, DECREMENT } from "../actionTypes/actionTypes";
+import { ASYNC_INCREMENT, INCREMENT, DECREMENT } from "./actionTypes";
 import { map, debounceTime } from "rxjs/operators";
 import { ofType } from '../store/operators';
 

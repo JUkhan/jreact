@@ -1,6 +1,13 @@
 import { render, h } from "./preact/preact";
-//import { h } from './preact/h';
-import { RootComponent } from './test';
-var context = { age: 20 }
+import { RootComponent } from './components/rootComponent';
+import { getStoreContext } from './store/storeContext'
+import { CounterEffect } from "./states/counterEffects";
+import { TutorialState } from "./states/tutoroalState";
+import { CounterSate } from "./states/counterState";
 
-render(<RootComponent context={context} />, document.getElementById('create-article-form'))
+var store = getStoreContext({
+    states: [CounterSate, TutorialState],
+    effects: [CounterEffect]
+});
+
+render(<RootComponent store={store} />, document.getElementById('create-article-form'))

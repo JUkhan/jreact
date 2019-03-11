@@ -33,9 +33,12 @@ class StoreContext {
         this.dispatcher.dispose();
         this.store.dispose();
         this.effSubs.dispose();
+        console.log('store-disposed-successfully');
     }
 }
 
-export function getStoreContext({ initialState = {}, states = [] }) {
-    return new StoreContext(initialState, states);
+export function getStoreContext({ initialState = {}, states = [], effects = [] }) {
+    const ctx = new StoreContext(initialState, states);
+    ctx.addEffects(...effects);
+    return ctx;
 }

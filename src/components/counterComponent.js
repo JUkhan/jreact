@@ -1,17 +1,12 @@
-import { Component, h } from "./preact/preact";
-import { getStoreContext } from "./store/storeContext";
-import { INCREMENT, DECREMENT, ASYNC_INCREMENT } from "./actionTypes/actionTypes";
-import { mapTo, debounceTime } from 'rxjs/operators';
+import { Component, h } from "../preact/preact";
+import { INCREMENT, DECREMENT, ASYNC_INCREMENT } from "../states/actionTypes";
 
-import { CounterEffect } from "./states/counterEffects";
-import { CounterSate } from './states/counterState';
-
-
-class Counter extends Component {
+export class Counter extends Component {
     constructor(props) {
         super(props)
         this.state = { count: 1 }
     }
+    com
     subscription;
     componentWillMount() {
 
@@ -38,33 +33,11 @@ class Counter extends Component {
         this.context.store.dispatch({ type: ASYNC_INCREMENT });
     }
     render(props, { count, msg }) {
-        console.log(count, msg);
+        console.log('counter-component');
         return <div>
             <button onClick={this.increment}>+</button>
             <button onClick={this.decrement}>-</button>
             <button onClick={this.asyncIncrement}>Asunc (+)</button> <b>count {msg || count}</b>
-        </div>
-    }
-}
-
-export class RootComponent extends Component {
-    constructor() {
-        super();
-
-    }
-    componentWillMount() {
-        this.context.store = getStoreContext({
-            states: [CounterSate]
-        });
-        this.context.store.addEffects(CounterEffect);
-    }
-    componentWillUnmount() {
-        this.context.store.dispose();
-    }
-    render(props) {
-
-        return <div style={{ color: 'green' }}>Hello world {props.context.age}
-            <Counter></Counter>
         </div>
     }
 }

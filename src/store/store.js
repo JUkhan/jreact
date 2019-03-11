@@ -17,7 +17,7 @@ export class Store extends BehaviorSubject {
         this.dispatcher = dispatcher;
         this.dispatcher.pipe(
             scan((state, action) => combineStates(state, action, this.states), initialState)
-        ).subscribe(newState => super.next(newState))
+        ).subscribe(newState => { super.next(newState); });
     }
     dispatch(action) {
         this.dispatcher.next(action);
