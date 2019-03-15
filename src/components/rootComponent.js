@@ -11,7 +11,7 @@ import { Connect } from '../store/decorators/connect';
 export class RootComponent extends Component {
     constructor() {
         super();
-        this.state = { tutorials: [] }
+
     }
 
     componentWillUnmount() {

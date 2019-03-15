@@ -10,7 +10,7 @@ export class Counter extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { counter: {} }
+
     }
     increment = () => {
         this.store.dispatch({ type: INCREMENT });

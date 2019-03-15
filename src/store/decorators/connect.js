@@ -5,7 +5,6 @@ const META_KEY = '__smc___'
 function mount() {
     const meta = this[META_KEY];
     meta.mount.call(this);
-    let that = this;
     Object.keys(meta.mapState).forEach(key => {
         meta.subscriptions.push(
             this.store.select(meta.mapState[key])
@@ -28,7 +27,7 @@ export function Connect(mapState = {}) {
         });
 
         const mapKeys = Object.keys(mapState);
-        if (mapKeys.length == 0) return;
+        if (mapKeys.length === 0) return;
 
         let config = {
             mount: () => { },

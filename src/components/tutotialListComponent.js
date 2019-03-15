@@ -8,7 +8,7 @@ import { Connect } from "../store/decorators/connect";
 export class TutorialList extends Component {
     constructor() {
         super()
-        this.state = { tutorials: [] }
+
     }
 
     onRemove(name) {

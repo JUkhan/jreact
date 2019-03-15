@@ -17,8 +17,11 @@ class StoreContext {
     dispatch(action) {
         this.dispatcher.dispatch(action);
     }
-    addReducer(key, reducer) {
-        this.store.addReducer(key, reducer);
+    addState(stateClass) {
+        this.store.addState(stateClass);
+    }
+    removeState(stateName) {
+        this.store.removeState(stateName);
     }
     select(callback) {
         return this.store.select(callback);
@@ -33,15 +36,21 @@ class StoreContext {
         this.dispatcher.dispose();
         this.store.dispose();
         this.effSubs.dispose();
+        this.devTools.dispose();
+        localStorage.setItem('dispose', 'done-successfully');
         console.log('store-disposed-successfully');
     }
 }
 var __store = undefined;
 
-export function setStoreContext({ initialState = {}, states = [], effects = [] }) {
+export function setStoreContext({ initialState = {}, states = [], effects = [], devTools = undefined }) {
     const ctx = new StoreContext(initialState, states);
     ctx.addEffects(...effects);
     __store = ctx;
+    if (devTools && devTools.run) {
+        ctx.devTools = devTools;
+        devTools.run(ctx);
+    }
 }
 
 //export const Dagger = createContext();

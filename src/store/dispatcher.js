@@ -3,7 +3,7 @@ import { filter } from 'rxjs/operators';
 
 export class Dispatcher extends BehaviorSubject {
     constructor() {
-        super({})
+        super({ type: '@@INIT' })
     }
 
     dispatch(action) {
@@ -15,10 +15,11 @@ export class Dispatcher extends BehaviorSubject {
             filter(action => action.type === actionType)
         );
     }
+    complete() {
 
-
+    }
 
     dispose() {
-        this.complete();
+        super.complete();
     }
 }
